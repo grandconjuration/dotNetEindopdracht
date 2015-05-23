@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="netpracticumModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="producten">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="naam" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prijs" Type="float" Nullable="false" />
+          <Property Name="aantal" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="saldo" Type="double" />
+        </EntityType>
+        <EntityType Name="usersproducten">
+          <Key>
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="productid" Type="int" Nullable="false" />
+          <Property Name="aantal" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_product_id">
+          <End Role="producten" Type="Self.producten" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producten">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usersproducten">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id">
+          <End Role="users" Type="Self.users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usersproducten">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="netpracticumModelStoreContainer">
+          <EntitySet Name="producten" EntityType="Self.producten" Schema="netpracticum" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="netpracticum" store:Type="Tables" />
+          <EntitySet Name="usersproducten" EntityType="Self.usersproducten" Schema="netpracticum" store:Type="Tables" />
+          <AssociationSet Name="fk_product_id" Association="Self.fk_product_id">
+            <End Role="producten" EntitySet="producten" />
+            <End Role="usersproducten" EntitySet="usersproducten" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="usersproducten" EntitySet="usersproducten" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="netpracticumModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="producten">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="naam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prijs" Type="Single" Nullable="false" />
+          <Property Name="aantal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="usersproductens" Relationship="Self.fk_product_id" FromRole="producten" ToRole="usersproducten" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="saldo" Type="Double" />
+          <NavigationProperty Name="usersproductens" Relationship="Self.fk_user_id" FromRole="users" ToRole="usersproducten" />
+        </EntityType>
+        <EntityType Name="usersproducten">
+          <Key>
+            <PropertyRef Name="userid" />
+            <PropertyRef Name="productid" />
+          </Key>
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="productid" Type="Int32" Nullable="false" />
+          <Property Name="aantal" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="producten" Relationship="Self.fk_product_id" FromRole="usersproducten" ToRole="producten" />
+          <NavigationProperty Name="user" Relationship="Self.fk_user_id" FromRole="usersproducten" ToRole="users" />
+        </EntityType>
+        <Association Name="fk_product_id">
+          <End Role="producten" Type="Self.producten" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="producten">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usersproducten">
+              <PropertyRef Name="productid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_user_id">
+          <End Role="users" Type="Self.user" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="usersproducten">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="netpracticumEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="productens" EntityType="Self.producten" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="usersproductens" EntityType="Self.usersproducten" />
+          <AssociationSet Name="fk_product_id" Association="Self.fk_product_id">
+            <End Role="producten" EntitySet="productens" />
+            <End Role="usersproducten" EntitySet="usersproductens" />
+          </AssociationSet>
+          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+            <End Role="users" EntitySet="users" />
+            <End Role="usersproducten" EntitySet="usersproductens" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="netpracticumModelStoreContainer" CdmEntityContainer="netpracticumEntities1">
+          <EntitySetMapping Name="productens">
+            <EntityTypeMapping TypeName="netpracticumModel.producten">
+              <MappingFragment StoreEntitySet="producten">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="naam" ColumnName="naam" />
+                <ScalarProperty Name="prijs" ColumnName="prijs" />
+                <ScalarProperty Name="aantal" ColumnName="aantal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="netpracticumModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="saldo" ColumnName="saldo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usersproductens">
+            <EntityTypeMapping TypeName="netpracticumModel.usersproducten">
+              <MappingFragment StoreEntitySet="usersproducten">
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="productid" ColumnName="productid" />
+                <ScalarProperty Name="aantal" ColumnName="aantal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

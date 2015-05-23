@@ -1,0 +1,6 @@
+/packages
+/WcfServiceLibrary1/bin/*
+/WcfServiceLibrary1/obj/*
+/WcfServiceLibrary1/App.config
+*.suo
+*.user
