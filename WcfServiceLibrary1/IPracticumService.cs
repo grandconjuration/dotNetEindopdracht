@@ -20,5 +20,8 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         List<producten> getProducts();
+
+        [OperationContract]
+        string Buy(int userId, int productId, int volume);
     }
 }
