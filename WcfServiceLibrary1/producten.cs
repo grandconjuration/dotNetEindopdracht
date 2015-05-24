@@ -21,7 +21,7 @@ namespace WcfServiceLibrary1
     
         public int id { get; set; }
         public string naam { get; set; }
-        public float prijs { get; set; }
+        public double prijs { get; set; }
         public int aantal { get; set; }
     
         public virtual ICollection<usersproducten> usersproductens { get; set; }

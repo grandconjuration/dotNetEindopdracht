@@ -5,13 +5,20 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
+using System.Web.Script.Services;
 
 namespace WcfServiceLibrary1
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
+    [DataContract] 
     public class PracticumService : IPracticumService
     {
-netpracticumEntities dbContext = new netpracticumEntities();
+        netpracticumEntities dbContext = new netpracticumEntities();
+
+        public PracticumService()
+        {
+            dbContext.Configuration.ProxyCreationEnabled = false; 
+        }
 
         public string Register(string givenUsername)
         {
@@ -45,9 +52,25 @@ netpracticumEntities dbContext = new netpracticumEntities();
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
             return false;
+        }
+
+        public List<producten> getProducts()
+        {
+            try
+            {
+                List<producten> products = (from p in dbContext.productens
+                                            where p.aantal > 0
+                                            select p).ToList();
+                return products;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
         }
     }
 }

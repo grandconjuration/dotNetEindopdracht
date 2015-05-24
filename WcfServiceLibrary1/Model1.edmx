@@ -11,7 +11,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="naam" Type="varchar" MaxLength="45" Nullable="false" />
-          <Property Name="prijs" Type="float" Nullable="false" />
+          <Property Name="prijs" Type="double" Nullable="false" />
           <Property Name="aantal" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="users">
@@ -84,7 +84,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="naam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="prijs" Type="Single" Nullable="false" />
+          <Property Name="prijs" Type="Double" Nullable="false" />
           <Property Name="aantal" Type="Int32" Nullable="false" />
           <NavigationProperty Name="usersproductens" Relationship="Self.fk_product_id" FromRole="producten" ToRole="usersproducten" />
         </EntityType>
@@ -137,7 +137,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="netpracticumEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="netpracticumEntities2" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="productens" EntityType="Self.producten" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="usersproductens" EntityType="Self.usersproducten" />
@@ -155,7 +155,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="netpracticumModelStoreContainer" CdmEntityContainer="netpracticumEntities1">
+        <EntityContainerMapping StorageEntityContainer="netpracticumModelStoreContainer" CdmEntityContainer="netpracticumEntities2">
           <EntitySetMapping Name="productens">
             <EntityTypeMapping TypeName="netpracticumModel.producten">
               <MappingFragment StoreEntitySet="producten">
