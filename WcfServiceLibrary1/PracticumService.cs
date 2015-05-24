@@ -99,7 +99,7 @@ namespace WcfServiceLibrary1
                 }
                 if(totalAmount > userCredit)
                 {
-                    return "U heeft niet genoeg krediet! U heeft " + totalAmount + " euro nodig, maar heeft " + userCredit + "euro.";
+                    return "U heeft niet genoeg krediet! U heeft " + totalAmount + " euro nodig, maar heeft " + userCredit + " euro.";
                 }
 
                 // update product data
