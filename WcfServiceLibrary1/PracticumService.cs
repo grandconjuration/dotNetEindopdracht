@@ -10,7 +10,6 @@ using System.Web.Script.Services;
 namespace WcfServiceLibrary1
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in both code and config file together.
-    [DataContract] 
     public class PracticumService : IPracticumService
     {
         netpracticumEntities dbContext = new netpracticumEntities();
