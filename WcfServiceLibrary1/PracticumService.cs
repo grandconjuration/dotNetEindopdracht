@@ -72,10 +72,11 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public string Buy(int userId, int productId, int volume)
+        public string BuyProduct(int userId, int productId, int volume)
         {
+            /*
             try
-            {
+            {*/
                 // check if the user has enough credit
                 user user = (from u in dbContext.users
                             where u.id == userId
@@ -96,7 +97,7 @@ namespace WcfServiceLibrary1
                 {
                     return "Er zijn maar " + product.aantal + " stuks in voorraad";
                 }
-                if(totalAmount > userCredit)
+                if((double) totalAmount > (double) userCredit)
                 {
                     return "U heeft niet genoeg krediet! U heeft " + totalAmount + " euro nodig, maar heeft " + userCredit + " euro.";
                 }
@@ -121,12 +122,12 @@ namespace WcfServiceLibrary1
                 dbContext.SaveChanges();
 
                 return "Succesvolle transactie! Transactie informatie: Gebruiker: " + userProduct.userid + "; Product: " + userProduct.productid + "; aantal: " + userProduct.aantal + ";";
-            }
+         /*   }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
                 return "Er ging iets mis: " + ex.Message;
-            }
+            }*/
         }
     }
 }

@@ -25,17 +25,15 @@
         </EntityType>
         <EntityType Name="usersproducten">
           <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="productid" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userid" Type="int" Nullable="false" />
           <Property Name="productid" Type="int" Nullable="false" />
           <Property Name="aantal" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="fk_product_id">
-          <End Role="producten" Type="Self.producten" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="fk_product">
+          <End Role="producten" Type="Self.producten" Multiplicity="1" />
           <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="producten">
@@ -46,10 +44,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_user_id">
-          <End Role="users" Type="Self.users" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="fk_user">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
           <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
@@ -64,11 +60,11 @@
           <EntitySet Name="producten" EntityType="Self.producten" Schema="netpracticum" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="netpracticum" store:Type="Tables" />
           <EntitySet Name="usersproducten" EntityType="Self.usersproducten" Schema="netpracticum" store:Type="Tables" />
-          <AssociationSet Name="fk_product_id" Association="Self.fk_product_id">
+          <AssociationSet Name="fk_product" Association="Self.fk_product">
             <End Role="producten" EntitySet="producten" />
             <End Role="usersproducten" EntitySet="usersproducten" />
           </AssociationSet>
-          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+          <AssociationSet Name="fk_user" Association="Self.fk_user">
             <End Role="users" EntitySet="users" />
             <End Role="usersproducten" EntitySet="usersproducten" />
           </AssociationSet>
@@ -86,7 +82,7 @@
           <Property Name="naam" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="prijs" Type="Double" Nullable="false" />
           <Property Name="aantal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="usersproductens" Relationship="Self.fk_product_id" FromRole="producten" ToRole="usersproducten" />
+          <NavigationProperty Name="usersproductens" Relationship="Self.fk_product" FromRole="producten" ToRole="usersproducten" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -96,23 +92,21 @@
           <Property Name="username" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="saldo" Type="Double" />
-          <NavigationProperty Name="usersproductens" Relationship="Self.fk_user_id" FromRole="users" ToRole="usersproducten" />
+          <NavigationProperty Name="usersproductens" Relationship="Self.fk_user" FromRole="users" ToRole="usersproducten" />
         </EntityType>
         <EntityType Name="usersproducten">
           <Key>
-            <PropertyRef Name="userid" />
-            <PropertyRef Name="productid" />
+            <PropertyRef Name="id" />
           </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userid" Type="Int32" Nullable="false" />
           <Property Name="productid" Type="Int32" Nullable="false" />
           <Property Name="aantal" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="producten" Relationship="Self.fk_product_id" FromRole="usersproducten" ToRole="producten" />
-          <NavigationProperty Name="user" Relationship="Self.fk_user_id" FromRole="usersproducten" ToRole="users" />
+          <NavigationProperty Name="producten" Relationship="Self.fk_product" FromRole="usersproducten" ToRole="producten" />
+          <NavigationProperty Name="user" Relationship="Self.fk_user" FromRole="usersproducten" ToRole="users" />
         </EntityType>
-        <Association Name="fk_product_id">
-          <End Role="producten" Type="Self.producten" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="fk_product">
+          <End Role="producten" Type="Self.producten" Multiplicity="1" />
           <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="producten">
@@ -123,10 +117,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_user_id">
-          <End Role="users" Type="Self.user" Multiplicity="1">
-            <OnDelete Action="Cascade" />
-          </End>
+        <Association Name="fk_user">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
           <End Role="usersproducten" Type="Self.usersproducten" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="users">
@@ -137,15 +129,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="netpracticumEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="netpracticumEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="productens" EntityType="Self.producten" />
           <EntitySet Name="users" EntityType="Self.user" />
           <EntitySet Name="usersproductens" EntityType="Self.usersproducten" />
-          <AssociationSet Name="fk_product_id" Association="Self.fk_product_id">
+          <AssociationSet Name="fk_product" Association="Self.fk_product">
             <End Role="producten" EntitySet="productens" />
             <End Role="usersproducten" EntitySet="usersproductens" />
           </AssociationSet>
-          <AssociationSet Name="fk_user_id" Association="Self.fk_user_id">
+          <AssociationSet Name="fk_user" Association="Self.fk_user">
             <End Role="users" EntitySet="users" />
             <End Role="usersproducten" EntitySet="usersproductens" />
           </AssociationSet>
@@ -155,7 +147,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="netpracticumModelStoreContainer" CdmEntityContainer="netpracticumEntities2">
+        <EntityContainerMapping StorageEntityContainer="netpracticumModelStoreContainer" CdmEntityContainer="netpracticumEntities1">
           <EntitySetMapping Name="productens">
             <EntityTypeMapping TypeName="netpracticumModel.producten">
               <MappingFragment StoreEntitySet="producten">
@@ -179,6 +171,7 @@
           <EntitySetMapping Name="usersproductens">
             <EntityTypeMapping TypeName="netpracticumModel.usersproducten">
               <MappingFragment StoreEntitySet="usersproducten">
+                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="userid" ColumnName="userid" />
                 <ScalarProperty Name="productid" ColumnName="productid" />
                 <ScalarProperty Name="aantal" ColumnName="aantal" />

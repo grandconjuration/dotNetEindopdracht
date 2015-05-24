@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="768b6b5edd844dbf8e5e58a6f174de79" Name="Diagram1">
-        <EntityTypeShape EntityType="netpracticumModel.producten" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="netpracticumModel.user" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+      <Diagram DiagramId="4bba12ef824743488257963219339ac1" Name="Diagram1">
+        <EntityTypeShape EntityType="netpracticumModel.producten" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="netpracticumModel.user" Width="1.5" PointX="0.75" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="netpracticumModel.usersproducten" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <AssociationConnector Association="netpracticumModel.fk_product_id" ManuallyRouted="false" />
-        <AssociationConnector Association="netpracticumModel.fk_user_id" ManuallyRouted="false" />
+        <AssociationConnector Association="netpracticumModel.fk_product" ManuallyRouted="false" />
+        <AssociationConnector Association="netpracticumModel.fk_user" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

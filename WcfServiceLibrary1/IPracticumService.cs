@@ -22,6 +22,6 @@ namespace WcfServiceLibrary1
         List<producten> getProducts();
 
         [OperationContract]
-        string Buy(int userId, int productId, int volume);
+        string BuyProduct(int userId, int productId, int volume);
     }
 }

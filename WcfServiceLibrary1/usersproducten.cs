@@ -14,6 +14,7 @@ namespace WcfServiceLibrary1
     
     public partial class usersproducten
     {
+        public int id { get; set; }
         public int userid { get; set; }
         public int productid { get; set; }
         public int aantal { get; set; }
