@@ -93,6 +93,10 @@ namespace WcfServiceLibrary1
                 double? totalAmount = productPrice * buyingVolume;
     
                 // check if there is enough in stock
+                if(product.aantal == 0)
+                {
+                    return "Dit product is niet meer op voorraad.";
+                }
                 if(buyingVolume > product.aantal)
                 {
                     return "Er zijn maar " + product.aantal + " stuks in voorraad";
