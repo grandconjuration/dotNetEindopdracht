@@ -22,12 +22,12 @@ namespace WcfServiceLibrary1
         List<producten> getProducts(string username, string password);
 
         [OperationContract]
-        string BuyProduct(string username, string password, int userId, int productId, int volume);
+        string BuyProduct(string username, string password, int productId, int volume);
 
         [OperationContract]
-        List<usersproducten> GetPurchases(string username, string password, int userId);
+        List<usersproducten> GetPurchases(string username, string password);
 
         [OperationContract]
-        double? GetSaldo(string username, string password, int userId);
+        double? GetSaldo(string username, string password);
     }
 }

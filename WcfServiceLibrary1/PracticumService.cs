@@ -92,7 +92,7 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public string BuyProduct(string username, string password, int userId, int productId, int volume)
+        public string BuyProduct(string username, string password, int productId, int volume)
         {
             if (!LogIn(username, password))
             {
@@ -103,13 +103,13 @@ namespace WcfServiceLibrary1
             {
                 // check if the user has enough credit
                 user user = (from u in dbContext.users
-                            where u.id == userId
-                            select u).FirstOrDefault();
+                             where u.username == username
+                             select u).FirstOrDefault();
                 double? userCredit = user.saldo;
     
                 producten product = (from p in dbContext.productens
-                                    where p.id == productId
-                                    select p).FirstOrDefault();
+                                     where p.id == productId
+                                     select p).FirstOrDefault();
                 double? productPrice = product.prijs;
     
                 int buyingVolume = volume;
@@ -140,7 +140,7 @@ namespace WcfServiceLibrary1
 
                 // add new record of transaction
                 usersproducten userProduct = new usersproducten();
-                userProduct.userid = userId;
+                userProduct.userid = user.id;
                 userProduct.productid = productId;
                 userProduct.aantal = volume;
 
@@ -158,7 +158,7 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public List<usersproducten> GetPurchases(string username, string password, int userId)
+        public List<usersproducten> GetPurchases(string username, string password)
         {
             if (!LogIn(username, password))
             {
@@ -169,7 +169,8 @@ namespace WcfServiceLibrary1
             {
                 // Get the usersproducten of the user
                 List<usersproducten> usersproductens = (from up in dbContext.usersproductens
-                                                        where up.userid == userId
+                                                        join u in dbContext.users on up.userid equals u.id
+                                                        where u.username == username
                                                         /*
                                                         join p in dbContext.productens on up.productid equals p.id
                                                         select new usersproducten {
@@ -213,7 +214,7 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public double? GetSaldo(string username, string password, int userId)
+        public double? GetSaldo(string username, string password)
         {
             if (!LogIn(username, password))
             {
@@ -223,7 +224,7 @@ namespace WcfServiceLibrary1
             try
             {
                 double? saldo = (from u in dbContext.users
-                                 where u.id == userId
+                                 where u.username == username
                                  select u.saldo).FirstOrDefault();
                 return saldo;
             }

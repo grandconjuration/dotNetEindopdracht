@@ -11,6 +11,7 @@ namespace WcfServiceLibrary1
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.Serialization;
     
     public partial class usersproducten
     {
@@ -18,8 +19,10 @@ namespace WcfServiceLibrary1
         public int userid { get; set; }
         public int productid { get; set; }
         public int aantal { get; set; }
-    
+
+        [IgnoreDataMember]
         public virtual producten producten { get; set; }
+        [IgnoreDataMember]
         public virtual user user { get; set; }
     }
 }
