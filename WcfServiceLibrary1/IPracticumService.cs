@@ -19,15 +19,15 @@ namespace WcfServiceLibrary1
         bool LogIn(string username, string password);
 
         [OperationContract]
-        List<producten> getProducts();
+        List<producten> getProducts(string username, string password);
 
         [OperationContract]
-        string BuyProduct(int userId, int productId, int volume);
+        string BuyProduct(string username, string password, int userId, int productId, int volume);
 
         [OperationContract]
-        List<usersproducten> GetPurchases(int userId);
+        List<usersproducten> GetPurchases(string username, string password, int userId);
 
         [OperationContract]
-        double? GetSaldo(int userId);
+        double? GetSaldo(string username, string password, int userId);
     }
 }

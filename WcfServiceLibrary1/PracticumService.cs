@@ -21,33 +21,49 @@ namespace WcfServiceLibrary1
 
         public string Register(string givenUsername)
         {
-            char[] passwordCharArray = givenUsername.ToCharArray();
-            Array.Reverse(passwordCharArray);
-            string strPassword = new string(passwordCharArray);
+            var user = (from u in dbContext.users
+                            where u.username == givenUsername
+                            select u).FirstOrDefault();
 
-            user newUser = new user();
-            newUser.username = givenUsername;
-            newUser.password = strPassword;
-            newUser.saldo = 100;
+            if (user == null) {
+                char[] passwordCharArray = givenUsername.ToCharArray();
+                Array.Reverse(passwordCharArray);
+                string strPassword = new string(passwordCharArray);
 
-            dbContext.users.Add(newUser);
-            dbContext.SaveChanges();
-            
-            user u = dbContext.users.Find(4);
-            Debug.WriteLine(u.username);
+                user newUser = new user();
+                newUser.username = givenUsername;
+                newUser.password = strPassword;
+                newUser.saldo = 100;
 
-            return strPassword;
+                dbContext.users.Add(newUser);
+                dbContext.SaveChanges();
+
+                return "Succesvol geregistreerd! Uw wachtwoord is: " + strPassword;
+            }
+            else {
+                return "Deze gebruikernaam is al in gebruik. Kies een andere gebruikersnaam.";
+            }
         }
 
+        // TO DO: Check if user exists, THEN return true
         public bool LogIn(string username, string password)
         {
             try
             {
-                user user = (from u in dbContext.users
+                var user = (from u in dbContext.users
                              where u.username == username && u.password == password
                              select u).FirstOrDefault();
-                Debug.WriteLine("username: " + user.username + ", password: " + user.password);
-                return true;
+
+                if (user != null)
+                {
+                    //Debug.WriteLine("DEBUG: username: " + user.username + ", password: " + user.password);
+                    return true;
+                }
+                else
+                {
+                    Debug.WriteLine("U bent niet ingelogd!");
+                    return false;
+                }
             }
             catch (Exception ex)
             {
@@ -56,8 +72,12 @@ namespace WcfServiceLibrary1
             return false;
         }
 
-        public List<producten> getProducts()
+        public List<producten> getProducts(string username, string password)
         {
+            if (!LogIn(username, password)) {
+                return null;
+            }
+
             try
             {
                 List<producten> products = (from p in dbContext.productens
@@ -72,9 +92,13 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public string BuyProduct(int userId, int productId, int volume)
+        public string BuyProduct(string username, string password, int userId, int productId, int volume)
         {
-            
+            if (!LogIn(username, password))
+            {
+                return null;
+            }
+
             try
             {
                 // check if the user has enough credit
@@ -134,8 +158,13 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public List<usersproducten> GetPurchases(int userId)
+        public List<usersproducten> GetPurchases(string username, string password, int userId)
         {
+            if (!LogIn(username, password))
+            {
+                return null;
+            }
+
             try
             {
                 // Get the usersproducten of the user
@@ -153,15 +182,29 @@ namespace WcfServiceLibrary1
                                                         select up
                                                         ).ToList();
 
+                return usersproductens;
+
                 // Fill the "usersproducten" with their respective "producten"
                 /*
-                foreach (usersproducten up in productsByUser) {
-                    up.producten = (from p in dbContext.productens
-                                    where p.id == up.productid
-                                    select p).FirstOrDefault();
-                } */
+                List<usersproducten> purchases = new List<usersproducten>();
+                if (usersproductens.Count() > 0)
+                {
+                    foreach (usersproducten up in usersproductens) {
+                        usersproducten upFilled = up;
+                        upFilled.producten = (from p in dbContext.productens
+                                              where p.id == up.productid
+                                              select p).FirstOrDefault();
+                        purchases.Add(upFilled);
+                    }
+                }
+                else
+                {
+                    Debug.WriteLine("DEBUG: Deze gebruiker heeft nog niets gekocht.");
+                    return null;
+                }
 
-                return usersproductens;
+                return purchases;
+                */
             }
             catch (Exception ex)
             {
@@ -170,8 +213,13 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public double? GetSaldo(int userId)
+        public double? GetSaldo(string username, string password, int userId)
         {
+            if (!LogIn(username, password))
+            {
+                return null;
+            }
+
             try
             {
                 double? saldo = (from u in dbContext.users
@@ -185,6 +233,5 @@ namespace WcfServiceLibrary1
                 return null;
             }
         }
-
     }
 }
