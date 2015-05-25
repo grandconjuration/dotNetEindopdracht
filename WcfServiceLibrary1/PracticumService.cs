@@ -130,8 +130,61 @@ namespace WcfServiceLibrary1
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-                return "Er ging iets mis: " + ex.Message;
+                return null;
             }
         }
+
+        public List<usersproducten> GetPurchases(int userId)
+        {
+            try
+            {
+                // Get the usersproducten of the user
+                List<usersproducten> usersproductens = (from up in dbContext.usersproductens
+                                                        where up.userid == userId
+                                                        /*
+                                                        join p in dbContext.productens on up.productid equals p.id
+                                                        select new usersproducten {
+                                                            id = up.id,
+                                                            userid = up.userid,
+                                                            productid = up.productid,
+                                                            aantal = up.aantal,
+                                                            producten = p
+                                                        } */
+                                                        select up
+                                                        ).ToList();
+
+                // Fill the "usersproducten" with their respective "producten"
+                /*
+                foreach (usersproducten up in productsByUser) {
+                    up.producten = (from p in dbContext.productens
+                                    where p.id == up.productid
+                                    select p).FirstOrDefault();
+                } */
+
+                return usersproductens;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+        public double? GetSaldo(int userId)
+        {
+            try
+            {
+                double? saldo = (from u in dbContext.users
+                                 where u.id == userId
+                                 select u.saldo).FirstOrDefault();
+                return saldo;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
     }
 }

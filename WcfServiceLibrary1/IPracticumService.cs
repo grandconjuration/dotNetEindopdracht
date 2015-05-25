@@ -23,5 +23,11 @@ namespace WcfServiceLibrary1
 
         [OperationContract]
         string BuyProduct(int userId, int productId, int volume);
+
+        [OperationContract]
+        List<usersproducten> GetPurchases(int userId);
+
+        [OperationContract]
+        double? GetSaldo(int userId);
     }
 }
