@@ -41,6 +41,26 @@ public class PracticumClientUI extends javax.swing.JFrame {
         productScrollPane = new javax.swing.JScrollPane();
         productTextPane = new javax.swing.JTextPane();
         productButton = new javax.swing.JButton();
+        purchaseButton1 = new javax.swing.JButton();
+        saldoLabel = new javax.swing.JLabel();
+        productScrollPane1 = new javax.swing.JScrollPane();
+        final String[] stringetjes = new String[80];
+        int i = 0;
+        for (String[] sArray : client.getProducts()) {
+            String s2 = "";
+            for (String s : sArray) {
+                s2 += " | " + s;
+            }
+            stringetjes[i] = s2;
+            i++;
+        }
+        productList = new javax.swing.JList();
+        purchaseButton = new javax.swing.JButton();
+        purchaseTextField = new javax.swing.JFormattedTextField();
+        purchaseLabel = new javax.swing.JLabel();
+        PurchasesView = new javax.swing.JFrame();
+        purchaseScrollPane = new javax.swing.JScrollPane();
+        purchaseTextPane = new javax.swing.JTextPane();
         headLabel = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         usernameField = new javax.swing.JTextField();
@@ -117,7 +137,8 @@ public class PracticumClientUI extends javax.swing.JFrame {
         );
 
         ProductView.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        ProductView.setMinimumSize(new java.awt.Dimension(284, 210));
+        ProductView.setMinimumSize(new java.awt.Dimension(304, 270));
+        ProductView.setResizable(false);
 
         productScrollPane.setViewportView(productTextPane);
 
@@ -128,26 +149,102 @@ public class PracticumClientUI extends javax.swing.JFrame {
             }
         });
 
+        purchaseButton1.setText("My Purchases");
+        purchaseButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseButton1ActionPerformed(evt);
+            }
+        });
+
+        saldoLabel.setText("Uw Saldo: ?");
+
+        productList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = stringetjes;
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        productScrollPane1.setViewportView(productList);
+
+        purchaseButton.setText("Purchase");
+        purchaseButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseButtonActionPerformed(evt);
+            }
+        });
+
+        purchaseTextField.setText("0");
+        purchaseTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                purchaseTextFieldActionPerformed(evt);
+            }
+        });
+
+        purchaseLabel.setText("...");
+
         javax.swing.GroupLayout ProductViewLayout = new javax.swing.GroupLayout(ProductView.getContentPane());
         ProductView.getContentPane().setLayout(ProductViewLayout);
         ProductViewLayout.setHorizontalGroup(
             ProductViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(ProductViewLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductViewLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productScrollPane)
+                .addGroup(ProductViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(purchaseLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(productScrollPane)
+                    .addComponent(productScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductViewLayout.createSequentialGroup()
+                        .addComponent(purchaseButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(purchaseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(purchaseButton1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ProductViewLayout.createSequentialGroup()
+                        .addComponent(productButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(saldoLabel)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(ProductViewLayout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(productButton)
-                .addContainerGap(86, Short.MAX_VALUE))
         );
         ProductViewLayout.setVerticalGroup(
             ProductViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ProductViewLayout.createSequentialGroup()
+            .addGroup(ProductViewLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(productButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                .addComponent(productScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(ProductViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(productButton)
+                    .addComponent(saldoLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(productScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 1, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(productScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(3, 3, 3)
+                .addGroup(ProductViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(purchaseButton1)
+                    .addComponent(purchaseButton)
+                    .addComponent(purchaseTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(purchaseLabel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        PurchasesView.setMinimumSize(new java.awt.Dimension(284, 240));
+
+        purchaseTextPane.setEditable(false);
+        purchaseScrollPane.setViewportView(purchaseTextPane);
+
+        javax.swing.GroupLayout PurchasesViewLayout = new javax.swing.GroupLayout(PurchasesView.getContentPane());
+        PurchasesView.getContentPane().setLayout(PurchasesViewLayout);
+        PurchasesViewLayout.setHorizontalGroup(
+            PurchasesViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PurchasesViewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(purchaseScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        PurchasesViewLayout.setVerticalGroup(
+            PurchasesViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PurchasesViewLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(purchaseScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -239,7 +336,6 @@ public class PracticumClientUI extends javax.swing.JFrame {
     }//GEN-LAST:event_usernameFieldActionPerformed
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        // TODO add your handling code here:
         boolean logInValid = client.logIn("" + usernameField.getText(), passwordField.getPassword());
         
         if (logInValid) {
@@ -263,6 +359,15 @@ public class PracticumClientUI extends javax.swing.JFrame {
             viewString += "\n" + sArray[0] + " | " + sArray[1] + " | " + sArray[2] + " | " + sArray[3];
         }
         productTextPane.setText(viewString);
+        
+        Double saldo = client.getSaldo();
+        String formatSaldo = "" + String.format("%1$,.2f", saldo);
+        if (!formatSaldo.equals("")) {
+            saldoLabel.setText("Uw Saldo: " + formatSaldo);
+        }
+        else {
+            saldoLabel.setText("Uw Saldo: " + saldo);
+        }
     }
     
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
@@ -282,6 +387,46 @@ public class PracticumClientUI extends javax.swing.JFrame {
     private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productButtonActionPerformed
         setProductView();
     }//GEN-LAST:event_productButtonActionPerformed
+
+    private void purchaseButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButton1ActionPerformed
+        List<String[]> purchaseList = client.getPurchases();
+        String viewString = "ID | ProductID | UserID | Aantal";
+
+        for (String[] sArray : purchaseList) {
+            viewString += "\n" + sArray[0] + " | " + sArray[1] + " | " + sArray[2] + " | " + sArray[3];
+        }
+        purchaseTextPane.setText(viewString);
+        productTextPane.setEditable(false);
+        PurchasesView.setLocationRelativeTo(null);
+        PurchasesView.setVisible(true);
+    }//GEN-LAST:event_purchaseButton1ActionPerformed
+
+    private void purchaseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseButtonActionPerformed
+        String purchaseAmount = "" + purchaseTextField.getText();
+        String purchaseSelected = "" + productList.getSelectedValue();
+        int purchaseAmountInt = -1;
+        int purchaseSelectedInt = -1;
+        
+        if (!purchaseAmount.equals("") && !purchaseSelected.equals("")) {
+            
+            purchaseSelected = purchaseSelected.split("\\s+")[2];
+            
+            try{
+                purchaseAmountInt = Integer.parseInt(purchaseAmount);
+                purchaseSelectedInt = Integer.parseInt(purchaseSelected);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        if (purchaseSelectedInt != -1 && purchaseAmountInt != -1) {
+            String response = client.buyProduct(purchaseSelectedInt, purchaseAmountInt);
+            purchaseLabel.setText("<html>"+ response +"</html>");
+        }
+    }//GEN-LAST:event_purchaseButtonActionPerformed
+
+    private void purchaseTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_purchaseTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_purchaseTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -320,6 +465,7 @@ public class PracticumClientUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFrame ProductView;
+    private javax.swing.JFrame PurchasesView;
     private javax.swing.JFrame RegisterView;
     private javax.swing.JLabel headLabel;
     private javax.swing.JButton loginButton;
@@ -327,12 +473,21 @@ public class PracticumClientUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton productButton;
+    private javax.swing.JList productList;
     private javax.swing.JScrollPane productScrollPane;
+    private javax.swing.JScrollPane productScrollPane1;
     private javax.swing.JTextPane productTextPane;
+    private javax.swing.JButton purchaseButton;
+    private javax.swing.JButton purchaseButton1;
+    private javax.swing.JLabel purchaseLabel;
+    private javax.swing.JScrollPane purchaseScrollPane;
+    private javax.swing.JFormattedTextField purchaseTextField;
+    private javax.swing.JTextPane purchaseTextPane;
     private javax.swing.JButton registerButton;
     private javax.swing.JButton registerButton1;
     private javax.swing.JLabel registerLabel;
     private javax.swing.JLabel responseLabel;
+    private javax.swing.JLabel saldoLabel;
     private javax.swing.JTextField usernameField;
     private javax.swing.JTextField usernameField1;
     private javax.swing.JLabel usernameLabel;

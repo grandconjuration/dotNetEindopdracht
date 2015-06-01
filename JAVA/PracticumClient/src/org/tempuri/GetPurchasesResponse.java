@@ -1,13 +1,11 @@
 
 package org.tempuri;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
-import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproducten;
 
 
 /**
@@ -20,7 +18,7 @@ import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproduct
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="GetPurchasesResult" type="{http://schemas.datacontract.org/2004/07/WcfServiceLibrary1}ArrayOfusersproducten" minOccurs="0"/>
+ *         &lt;element name="GetPurchasesResult" type="{http://tempuri.org/}ArrayOfUserProductDTO" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,18 +34,18 @@ import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproduct
 @XmlRootElement(name = "GetPurchasesResponse")
 public class GetPurchasesResponse {
 
-    @XmlElementRef(name = "GetPurchasesResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<ArrayOfusersproducten> getPurchasesResult;
+    @XmlElement(name = "GetPurchasesResult")
+    protected ArrayOfUserProductDTO getPurchasesResult;
 
     /**
      * Gets the value of the getPurchasesResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfusersproducten }{@code >}
+     *     {@link ArrayOfUserProductDTO }
      *     
      */
-    public JAXBElement<ArrayOfusersproducten> getGetPurchasesResult() {
+    public ArrayOfUserProductDTO getGetPurchasesResult() {
         return getPurchasesResult;
     }
 
@@ -56,10 +54,10 @@ public class GetPurchasesResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link ArrayOfusersproducten }{@code >}
+     *     {@link ArrayOfUserProductDTO }
      *     
      */
-    public void setGetPurchasesResult(JAXBElement<ArrayOfusersproducten> value) {
+    public void setGetPurchasesResult(ArrayOfUserProductDTO value) {
         this.getPurchasesResult = value;
     }
 

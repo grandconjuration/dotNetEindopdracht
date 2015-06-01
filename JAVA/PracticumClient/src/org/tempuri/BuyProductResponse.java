@@ -1,10 +1,9 @@
 
 package org.tempuri;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -35,18 +34,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "BuyProductResponse")
 public class BuyProductResponse {
 
-    @XmlElementRef(name = "BuyProductResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> buyProductResult;
+    @XmlElement(name = "BuyProductResult")
+    protected String buyProductResult;
 
     /**
      * Gets the value of the buyProductResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getBuyProductResult() {
+    public String getBuyProductResult() {
         return buyProductResult;
     }
 
@@ -55,10 +54,10 @@ public class BuyProductResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setBuyProductResult(JAXBElement<String> value) {
+    public void setBuyProductResult(String value) {
         this.buyProductResult = value;
     }
 

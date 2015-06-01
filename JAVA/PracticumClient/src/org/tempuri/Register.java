@@ -1,10 +1,8 @@
 
 package org.tempuri;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -35,18 +33,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "Register")
 public class Register {
 
-    @XmlElementRef(name = "username", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> username;
+    protected String username;
 
     /**
      * Gets the value of the username property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -55,10 +52,10 @@ public class Register {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setUsername(JAXBElement<String> value) {
+    public void setUsername(String value) {
         this.username = value;
     }
 

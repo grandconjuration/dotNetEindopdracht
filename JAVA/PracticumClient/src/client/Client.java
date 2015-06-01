@@ -1,10 +1,7 @@
 package client;
 
 import java.util.List;
-import com.microsoft.schemas._2003._10.serialization.*;
 import java.util.ArrayList;
-import java.util.Arrays;
-import org.datacontract.schemas._2004._07.wcfservicelibrary1.*;
 import org.tempuri.*;
 import ui.PracticumClientUI;
 
@@ -45,14 +42,14 @@ public class Client {
     }
     
     public List<String[]> getProducts() {
-        ArrayOfproducten productArray = proxy.getProducts(this.username, String.valueOf(this.password));
+        ArrayOfProducten productArray = proxy.getProducts(this.username, String.valueOf(this.password));
         //List<Producten> productList = productArray.getProducten();
         List<String[]> productList = new ArrayList<>();
         
         for (Producten p : productArray.getProducten()) {
             String[] sArray = new String[4];
             sArray[0] = "" + p.getId();
-            sArray[1] = "" + p.getNaam().getValue();
+            sArray[1] = "" + p.getNaam();
             sArray[2] = "" + p.getPrijs();
             sArray[3] = "" + p.getAantal();
             productList.add(sArray);
@@ -60,5 +57,32 @@ public class Client {
         
         return productList;
     }
+    
+    public String buyProduct(int purchaseSelected, int purchaseAmount) {
+        return proxy.buyProduct(this.username, String.valueOf(this.password), purchaseSelected, purchaseAmount);
+    }
+    
+    public List<String[]> getPurchases() {
+        ArrayOfUserProductDTO purchaseArray = proxy.getPurchases(this.username, String.valueOf(this.password));
+        List<String[]> purchaseList = new ArrayList<>();
+        
+        for (UserProductDTO up : purchaseArray.getUserProductDTO()) {
+            String[] sArray = new String[4];
+            sArray[0] = "" + up.getId();
+            sArray[1] = "" + up.getProductid();
+            sArray[2] = "" + up.getUserid();
+            sArray[3] = "" + up.getAantal();
+            purchaseList.add(sArray);
+        }
+        
+        return purchaseList;
+    }
+    
+    public double getSaldo() {
+        double saldo = proxy.getSaldo(this.username, String.valueOf(this.password));
+        return saldo;
+    }
+    
+    
 
 }

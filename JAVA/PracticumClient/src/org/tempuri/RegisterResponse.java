@@ -1,10 +1,9 @@
 
 package org.tempuri;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -35,18 +34,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "RegisterResponse")
 public class RegisterResponse {
 
-    @XmlElementRef(name = "RegisterResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<String> registerResult;
+    @XmlElement(name = "RegisterResult")
+    protected String registerResult;
 
     /**
      * Gets the value of the registerResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public JAXBElement<String> getRegisterResult() {
+    public String getRegisterResult() {
         return registerResult;
     }
 
@@ -55,10 +54,10 @@ public class RegisterResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link String }
      *     
      */
-    public void setRegisterResult(JAXBElement<String> value) {
+    public void setRegisterResult(String value) {
         this.registerResult = value;
     }
 

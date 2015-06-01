@@ -1,5 +1,5 @@
 
-package org.datacontract.schemas._2004._07.wcfservicelibrary1;
+package org.tempuri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for ArrayOfproducten complex type.
+ * <p>Java class for ArrayOfProducten complex type.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * 
  * <pre>
- * &lt;complexType name="ArrayOfproducten">
+ * &lt;complexType name="ArrayOfProducten">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="producten" type="{http://schemas.datacontract.org/2004/07/WcfServiceLibrary1}producten" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="producten" type="{http://tempuri.org/}producten" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,10 +29,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ArrayOfproducten", propOrder = {
+@XmlType(name = "ArrayOfProducten", propOrder = {
     "producten"
 })
-public class ArrayOfproducten {
+public class ArrayOfProducten {
 
     @XmlElement(nillable = true)
     protected List<Producten> producten;

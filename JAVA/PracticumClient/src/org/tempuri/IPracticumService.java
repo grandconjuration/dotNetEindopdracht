@@ -8,8 +8,6 @@ import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
-import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfproducten;
-import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproducten;
 
 
 /**
@@ -20,9 +18,7 @@ import org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproduct
  */
 @WebService(name = "IPracticumService", targetNamespace = "http://tempuri.org/")
 @XmlSeeAlso({
-    com.microsoft.schemas._2003._10.serialization.ObjectFactory.class,
-    org.datacontract.schemas._2004._07.wcfservicelibrary1.ObjectFactory.class,
-    org.tempuri.ObjectFactory.class
+    ObjectFactory.class
 })
 public interface IPracticumService {
 
@@ -46,13 +42,13 @@ public interface IPracticumService {
      * @param password
      * @param username
      * @return
-     *     returns java.lang.Boolean
+     *     returns boolean
      */
     @WebMethod(operationName = "LogIn", action = "http://tempuri.org/IPracticumService/LogIn")
     @WebResult(name = "LogInResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "LogIn", targetNamespace = "http://tempuri.org/", className = "org.tempuri.LogIn")
     @ResponseWrapper(localName = "LogInResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.LogInResponse")
-    public Boolean logIn(
+    public boolean logIn(
         @WebParam(name = "username", targetNamespace = "http://tempuri.org/")
         String username,
         @WebParam(name = "password", targetNamespace = "http://tempuri.org/")
@@ -63,13 +59,13 @@ public interface IPracticumService {
      * @param password
      * @param username
      * @return
-     *     returns org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfproducten
+     *     returns org.tempuri.ArrayOfProducten
      */
     @WebMethod(action = "http://tempuri.org/IPracticumService/getProducts")
     @WebResult(name = "getProductsResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "getProducts", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetProducts")
     @ResponseWrapper(localName = "getProductsResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetProductsResponse")
-    public ArrayOfproducten getProducts(
+    public ArrayOfProducten getProducts(
         @WebParam(name = "username", targetNamespace = "http://tempuri.org/")
         String username,
         @WebParam(name = "password", targetNamespace = "http://tempuri.org/")
@@ -94,22 +90,22 @@ public interface IPracticumService {
         @WebParam(name = "password", targetNamespace = "http://tempuri.org/")
         String password,
         @WebParam(name = "productId", targetNamespace = "http://tempuri.org/")
-        Integer productId,
+        int productId,
         @WebParam(name = "volume", targetNamespace = "http://tempuri.org/")
-        Integer volume);
+        int volume);
 
     /**
      * 
      * @param password
      * @param username
      * @return
-     *     returns org.datacontract.schemas._2004._07.wcfservicelibrary1.ArrayOfusersproducten
+     *     returns org.tempuri.ArrayOfUserProductDTO
      */
     @WebMethod(operationName = "GetPurchases", action = "http://tempuri.org/IPracticumService/GetPurchases")
     @WebResult(name = "GetPurchasesResult", targetNamespace = "http://tempuri.org/")
     @RequestWrapper(localName = "GetPurchases", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetPurchases")
     @ResponseWrapper(localName = "GetPurchasesResponse", targetNamespace = "http://tempuri.org/", className = "org.tempuri.GetPurchasesResponse")
-    public ArrayOfusersproducten getPurchases(
+    public ArrayOfUserProductDTO getPurchases(
         @WebParam(name = "username", targetNamespace = "http://tempuri.org/")
         String username,
         @WebParam(name = "password", targetNamespace = "http://tempuri.org/")

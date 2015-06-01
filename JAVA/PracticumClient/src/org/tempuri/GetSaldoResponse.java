@@ -1,10 +1,9 @@
 
 package org.tempuri;
 
-import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElementRef;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -19,7 +18,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="GetSaldoResult" type="{http://www.w3.org/2001/XMLSchema}double" minOccurs="0"/>
+ *         &lt;element name="GetSaldoResult" type="{http://www.w3.org/2001/XMLSchema}double"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -35,18 +34,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "GetSaldoResponse")
 public class GetSaldoResponse {
 
-    @XmlElementRef(name = "GetSaldoResult", namespace = "http://tempuri.org/", type = JAXBElement.class, required = false)
-    protected JAXBElement<Double> getSaldoResult;
+    @XmlElement(name = "GetSaldoResult", required = true, type = Double.class, nillable = true)
+    protected Double getSaldoResult;
 
     /**
      * Gets the value of the getSaldoResult property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link Double }{@code >}
+     *     {@link Double }
      *     
      */
-    public JAXBElement<Double> getGetSaldoResult() {
+    public Double getGetSaldoResult() {
         return getSaldoResult;
     }
 
@@ -55,10 +54,10 @@ public class GetSaldoResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link Double }{@code >}
+     *     {@link Double }
      *     
      */
-    public void setGetSaldoResult(JAXBElement<Double> value) {
+    public void setGetSaldoResult(Double value) {
         this.getSaldoResult = value;
     }
 
