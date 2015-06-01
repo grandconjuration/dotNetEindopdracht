@@ -4,3 +4,5 @@
 /WcfServiceLibrary1/App.config
 *.suo
 *.user
+/JAVA/PracticumClient/nbproject/private/
+/JAVA/PracticumClient/build/
