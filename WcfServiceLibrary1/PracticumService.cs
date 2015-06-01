@@ -158,7 +158,7 @@ namespace WcfServiceLibrary1
             }
         }
 
-        public List<usersproducten> GetPurchases(string username, string password)
+        public List<UserProductDTO> GetPurchases(string username, string password)
         {
             if (!LogIn(username, password))
             {
@@ -183,8 +183,30 @@ namespace WcfServiceLibrary1
                                                         select up
                                                         ).ToList();
 
-                return usersproductens;
+                List<UserProductDTO> upList = new List<UserProductDTO>();
 
+                foreach (usersproducten up in usersproductens)
+                {
+                    Debug.WriteLine(up.productid + " " + up.aantal);
+
+                    producten pr = (from pro in dbContext.productens
+                                    where pro.id == up.productid
+                                    select pro).FirstOrDefault();
+
+                    UserProductDTO upr = new UserProductDTO
+                    {
+                        id = up.id,
+                        userid = up.userid,
+                        productid = up.productid,
+                        aantal = up.aantal,
+                        productNaam = pr.naam
+                    };
+                    upList.Add(upr);
+                }
+
+
+        //        return usersproductens;
+                return upList;
                 // Fill the "usersproducten" with their respective "producten"
                 /*
                 List<usersproducten> purchases = new List<usersproducten>();

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PracticumService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:8733/Design_Time_Addresses/WcfServiceLibrary1/Service1/?xsd=xsd0" namespace="http://tempuri.org/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IPracticumService_Register_InputMessage">
+    <wsdl:part name="parameters" element="tns:Register" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_Register_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RegisterResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_LogIn_InputMessage">
+    <wsdl:part name="parameters" element="tns:LogIn" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_LogIn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogInResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_getProducts_InputMessage">
+    <wsdl:part name="parameters" element="tns:getProducts" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_getProducts_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_BuyProduct_InputMessage">
+    <wsdl:part name="parameters" element="tns:BuyProduct" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_BuyProduct_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BuyProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_GetPurchases_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPurchases" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_GetPurchases_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPurchasesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_GetSaldo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSaldo" />
+  </wsdl:message>
+  <wsdl:message name="IPracticumService_GetSaldo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSaldoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPracticumService">
+    <wsdl:operation name="Register">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/Register" message="tns:IPracticumService_Register_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/RegisterResponse" message="tns:IPracticumService_Register_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/LogIn" message="tns:IPracticumService_LogIn_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/LogInResponse" message="tns:IPracticumService_LogIn_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/getProducts" message="tns:IPracticumService_getProducts_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/getProductsResponse" message="tns:IPracticumService_getProducts_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BuyProduct">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/BuyProduct" message="tns:IPracticumService_BuyProduct_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/BuyProductResponse" message="tns:IPracticumService_BuyProduct_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchases">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/GetPurchases" message="tns:IPracticumService_GetPurchases_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/GetPurchasesResponse" message="tns:IPracticumService_GetPurchases_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSaldo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPracticumService/GetSaldo" message="tns:IPracticumService_GetSaldo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPracticumService/GetSaldoResponse" message="tns:IPracticumService_GetSaldo_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IPracticumService" type="tns:IPracticumService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Register">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/Register" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LogIn">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/LogIn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getProducts">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/getProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuyProduct">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/BuyProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchases">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/GetPurchases" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSaldo">
+      <soap:operation soapAction="http://tempuri.org/IPracticumService/GetSaldo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PracticumService">
+    <wsdl:port name="BasicHttpBinding_IPracticumService" binding="tns:BasicHttpBinding_IPracticumService">
+      <soap:address location="http://localhost:8733/Design_Time_Addresses/WcfServiceLibrary1/Service1/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

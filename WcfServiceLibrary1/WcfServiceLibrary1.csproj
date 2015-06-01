@@ -70,6 +70,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserProductDTO.cs" />
     <Compile Include="IPracticumService.cs" />
     <Compile Include="Model1.Context.cs">
       <AutoGen>True</AutoGen>

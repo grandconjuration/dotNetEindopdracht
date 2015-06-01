@@ -20,9 +20,7 @@ namespace WcfServiceLibrary1
         public int productid { get; set; }
         public int aantal { get; set; }
 
-        [IgnoreDataMember]
         public virtual producten producten { get; set; }
-        [IgnoreDataMember]
         public virtual user user { get; set; }
     }
 }

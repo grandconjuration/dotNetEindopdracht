@@ -9,7 +9,7 @@ using System.Text;
 namespace WcfServiceLibrary1
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the interface name "IService1" in both code and config file together.
-    [ServiceContract]
+    [ServiceContract, XmlSerializerFormat]
     public interface IPracticumService
     {
         [OperationContract]
@@ -25,7 +25,7 @@ namespace WcfServiceLibrary1
         string BuyProduct(string username, string password, int productId, int volume);
 
         [OperationContract]
-        List<usersproducten> GetPurchases(string username, string password);
+        List<UserProductDTO> GetPurchases(string username, string password);
 
         [OperationContract]
         double? GetSaldo(string username, string password);

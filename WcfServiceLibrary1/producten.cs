@@ -23,7 +23,7 @@ namespace WcfServiceLibrary1
         public string naam { get; set; }
         public double prijs { get; set; }
         public int aantal { get; set; }
-    
-        public virtual ICollection<usersproducten> usersproductens { get; set; }
+
+        public virtual HashSet<usersproducten> usersproductens { get; set; }
     }
 }

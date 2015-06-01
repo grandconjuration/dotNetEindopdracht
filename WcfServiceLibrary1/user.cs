@@ -23,7 +23,7 @@ namespace WcfServiceLibrary1
         public string username { get; set; }
         public string password { get; set; }
         public Nullable<double> saldo { get; set; }
-    
-        public virtual ICollection<usersproducten> usersproductens { get; set; }
+
+        public virtual HashSet<usersproducten> usersproductens { get; set; }
     }
 }
