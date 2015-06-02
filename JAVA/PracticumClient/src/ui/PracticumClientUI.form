@@ -7,9 +7,6 @@
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[284, 170]"/>
         </Property>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[243, 132]"/>
-        </Property>
         <Property name="resizable" type="boolean" value="false"/>
       </Properties>
 
@@ -207,9 +204,6 @@
                   <Connection code="new javax.swing.AbstractListModel() {&#xa;    String[] strings = stringetjes;&#xa;    //String[] strings = { &quot;Item 1&quot;, &quot;Item 2&quot;, &quot;Item 3&quot;, &quot;Item 4&quot;, &quot;Item 5&quot; };&#xa;    public int getSize() { return strings.length; }&#xa;    public Object getElementAt(int i) { return strings[i]; }&#xa;}" type="code"/>
                 </Property>
               </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="final String[] stringetjes = new String[80];&#xa;int i = 0;&#xa;for (String[] sArray : client.getProducts()) {&#xa;    String s2 = &quot;&quot;;&#xa;    for (String s : sArray) {&#xa;        s2 += &quot; | &quot; + s;&#xa;    }&#xa;    stringetjes[i] = s2;&#xa;    i++;&#xa;}"/>
-              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

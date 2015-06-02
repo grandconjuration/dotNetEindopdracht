@@ -14,6 +14,7 @@ import java.util.List;
  */
 public class PracticumClientUI extends javax.swing.JFrame {
     Client client = new Client();
+    final String[] stringetjes = new String[80];
 
     /**
      * Creates new form PracticumClientUI
@@ -44,16 +45,6 @@ public class PracticumClientUI extends javax.swing.JFrame {
         purchaseButton1 = new javax.swing.JButton();
         saldoLabel = new javax.swing.JLabel();
         productScrollPane1 = new javax.swing.JScrollPane();
-        final String[] stringetjes = new String[80];
-        int i = 0;
-        for (String[] sArray : client.getProducts()) {
-            String s2 = "";
-            for (String s : sArray) {
-                s2 += " | " + s;
-            }
-            stringetjes[i] = s2;
-            i++;
-        }
         productList = new javax.swing.JList();
         purchaseButton = new javax.swing.JButton();
         purchaseTextField = new javax.swing.JFormattedTextField();
@@ -71,7 +62,6 @@ public class PracticumClientUI extends javax.swing.JFrame {
         registerButton = new javax.swing.JButton();
 
         RegisterView.setMinimumSize(new java.awt.Dimension(284, 170));
-        RegisterView.setPreferredSize(new java.awt.Dimension(243, 132));
         RegisterView.setResizable(false);
 
         registerLabel.setText("Register a new account.");
@@ -352,13 +342,31 @@ public class PracticumClientUI extends javax.swing.JFrame {
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void setProductView() {
-        List<String[]> productList = client.getProducts();
+        int i = 0;
+        for (String[] sArray : client.getProducts()) {
+            String s2 = "";
+            for (String s : sArray) {
+                s2 += " | " + s;
+            }
+            stringetjes[i] = s2;
+            i++;
+        }
+        productList.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = stringetjes;
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        productScrollPane1.setViewportView(productList);
+        
+        /*
+        List<String[]> productListList = client.getProducts();
         String viewString = "ID | Naam | Prijs | Aantal";
-
-        for (String[] sArray : productList) {
+        for (String[] sArray : productListList) {
             viewString += "\n" + sArray[0] + " | " + sArray[1] + " | " + sArray[2] + " | " + sArray[3];
         }
         productTextPane.setText(viewString);
+        */
         
         Double saldo = client.getSaldo();
         String formatSaldo = "" + String.format("%1$,.2f", saldo);
